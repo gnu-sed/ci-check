@@ -29,7 +29,7 @@ git clone https://git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 
 # Apply patches.
-(cd "$package" && patch -p1 < ../patches/0001-tests-avoid-test-failure-when-running-as-root.patch)
+(cd "$package" && patch -p1 < ../patches/0001-tests-avoid-test-failure-when-running-as-root-or-in-.patch)
 (cd "$package" && patch -p1 < ../patches/0001-Avoid-UndefinedBehaviorSanitizer-undefined-behavior-.patch)
 (cd "$package" && patch -p1 < ../patches/0001-build-Fix-FTBFS-on-AIX-and-MSVC.patch)
 

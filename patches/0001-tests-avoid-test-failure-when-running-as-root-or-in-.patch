@@ -1,0 +1,31 @@
+From f4f6f2086eb602da3a9c528a287156c3f2787145 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Fri, 10 May 2024 20:40:32 +0200
+Subject: [PATCH] tests: avoid test failure when running as root or in Cygwin
+
+* testsuite/panic-tests.sh: When running as root or in Cygwin, skip the test.
+---
+ testsuite/panic-tests.sh | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/testsuite/panic-tests.sh b/testsuite/panic-tests.sh
+index 85aeec5..0244d92 100644
+--- a/testsuite/panic-tests.sh
++++ b/testsuite/panic-tests.sh
+@@ -27,6 +27,13 @@ mkdir a || framework_failure_
+ touch a/a || framework_failure_
+ chmod a-w a || framework_failure_
+ 
++# skip the test when running as root or when running in Cygwin
++# (because in these cases, the directory is still actually writable)
++test `id -u` != 0 || skip_ 'running as root'
++case `uname -s` in
++  CYGWIN*) skip_ 'running in cygwin' ;;
++esac
++
+ # Expected error message, with actual filename/errno trimmed
+ cat <<\EOF >exp-err-temp || framework_failure_
+ sed: couldn't open temporary file
+-- 
+2.34.1
+
