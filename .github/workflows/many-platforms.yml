@@ -520,6 +520,8 @@ jobs:
       - run: ls -l
       - run: echo "$PATH"
       - run: ls -l /usr/bin
+      - run: type help2man
+      - run: which help2man
       # Convert the shell script, that the Windows 'git' port has checked out
       # with CR-LF newlines, back to Unix newlines.
       - run: sed -i -e 's/\r$//' build-on.sh
