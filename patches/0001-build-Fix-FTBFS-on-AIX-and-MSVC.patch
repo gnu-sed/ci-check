@@ -1,0 +1,25 @@
+From 790290cac635e7d0839baba059fb39cc959cdffd Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Fri, 10 May 2024 22:47:39 +0200
+Subject: [PATCH] build: Fix FTBFS on AIX and MSVC.
+
+* bootstrap.conf (gnulib_modules): Add getopt-gnu.
+---
+ bootstrap.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/bootstrap.conf b/bootstrap.conf
+index c03ed02..6242398 100644
+--- a/bootstrap.conf
++++ b/bootstrap.conf
+@@ -30,6 +30,7 @@ extensions
+ fwriting
+ getdelim
+ gettext-h
++getopt-gnu
+ git-version-gen
+ gitlog-to-changelog
+ idx
+-- 
+2.34.1
+
