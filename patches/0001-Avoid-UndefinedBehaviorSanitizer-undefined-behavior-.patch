@@ -1,0 +1,46 @@
+From 85c7570f46e093df21d5d05ecd7c5c2163842518 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Fri, 10 May 2024 22:38:37 +0200
+Subject: [PATCH] Avoid "UndefinedBehaviorSanitizer: undefined-behavior
+ sed/execute.c:1288:20".
+
+---
+ sed/execute.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/sed/execute.c b/sed/execute.c
+index 1d38a5c..cc9c859 100644
+--- a/sed/execute.c
++++ b/sed/execute.c
+@@ -39,6 +39,19 @@
+ #include "progname.h"
+ #include "xalloc.h"
+ 
++/* END_OF_ARRAY(array,n) returns a pointer past the last element of the array
++   ARRAY that has N elements.
++   For clang, it uses a conditional expression that avoids adding 0 to a null
++   pointer, which is undefined according to ISO C 23 § 6.5.6.(9) and which
++   triggers an error in clang's undefined-behaviour sanitizer.  When no
++   sanitizer is in effect, clang optimizes this conditional expression to
++   exactly the same code.  */
++#if defined __clang__
++# define END_OF_ARRAY(array,n) ((n) ? (array) + (n) : (array))
++#else
++# define END_OF_ARRAY(array,n) ((array) + (n))
++#endif
++
+ /* The number of extra bytes that must be allocated/usable, beyond
+    the declared "end" of each line buffer that may be passed to
+    match_regex.  This is imposed by its use of dfaexec.  */
+@@ -1285,7 +1298,7 @@ execute_program (struct vector *vec, struct input *input)
+   struct sed_cmd *end_cmd;
+ 
+   cur_cmd = vec->v;
+-  end_cmd = vec->v + vec->v_length;
++  end_cmd = END_OF_ARRAY (vec->v, vec->v_length);
+   while (cur_cmd < end_cmd)
+     {
+       if (debug)
+-- 
+2.34.1
+
