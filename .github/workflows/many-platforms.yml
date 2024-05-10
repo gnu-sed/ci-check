@@ -506,7 +506,7 @@ jobs:
           platform: ${{ matrix.bitness == 32 && 'x86' || 'x86_64' }}
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make
+          packages: gcc-core make perl
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -520,8 +520,6 @@ jobs:
       - run: ls -l
       - run: echo "$PATH"
       - run: ls -l /usr/bin
-      - run: type help2man
-      - run: which help2man
       # Convert the shell script, that the Windows 'git' port has checked out
       # with CR-LF newlines, back to Unix newlines.
       - run: sed -i -e 's/\r$//' build-on.sh
@@ -571,7 +569,7 @@ jobs:
           platform: x86_64
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: ${{ matrix.bitness == 32 && 'mingw64-i686-gcc-core mingw64-i686-headers mingw64-i686-runtime' || 'mingw64-x86_64-gcc-core mingw64-x86_64-headers mingw64-x86_64-runtime' }} make
+          packages: ${{ matrix.bitness == 32 && 'mingw64-i686-gcc-core mingw64-i686-headers mingw64-i686-runtime' || 'mingw64-x86_64-gcc-core mingw64-x86_64-headers mingw64-x86_64-runtime' }} make perl
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -641,7 +639,7 @@ jobs:
           platform: x86_64
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: wget make
+          packages: wget make perl
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
