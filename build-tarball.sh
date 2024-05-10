@@ -27,6 +27,10 @@ set -e
 # No '--depth 1' here, because we need to run git-version-gen.
 git clone https://git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
+
+# Apply patches.
+(cd "$package" && patch -p1 < ../patches/0001-tests-avoid-test-failure-when-running-as-root.patch)
+
 export GNULIB_SRCDIR=`pwd`/gnulib
 cd "$package"
 # Force use of the newest gnulib.

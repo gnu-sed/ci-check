@@ -1,0 +1,27 @@
+From 109b2126681bb44ca3c1ad74848daa33ca8c7c5f Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Fri, 10 May 2024 20:40:32 +0200
+Subject: [PATCH] tests: avoid test failure when running as root
+
+* testsuite/panic-tests.sh: When running as root, skip the test.
+---
+ testsuite/panic-tests.sh | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/testsuite/panic-tests.sh b/testsuite/panic-tests.sh
+index 85aeec5..000f515 100644
+--- a/testsuite/panic-tests.sh
++++ b/testsuite/panic-tests.sh
+@@ -27,6 +27,9 @@ mkdir a || framework_failure_
+ touch a/a || framework_failure_
+ chmod a-w a || framework_failure_
+ 
++# skip the test when running as root
++test `id -u` != 0 || skip_ 'running as root'
++
+ # Expected error message, with actual filename/errno trimmed
+ cat <<\EOF >exp-err-temp || framework_failure_
+ sed: couldn't open temporary file
+-- 
+2.34.1
+
