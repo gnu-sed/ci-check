@@ -57,6 +57,18 @@ jobs:
       # - run: sudo apt install ...
       - run: |
           ./build-tarball.sh '${{ env.package }}'
+      # Doc: https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
+      - if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-build-tarball-failed
+          path: |
+            ${{ env.package }}/config.cache
+            ${{ env.package }}/config.log
+            ${{ env.package }}/config.status
+            ${{ env.package }}/log[1234]
+          retention-days: 7
+          overwrite: true
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - uses: actions/upload-artifact@v4
@@ -396,6 +408,7 @@ jobs:
             pwd
             ls -l
             export CPPFLAGS="-Wall"
+            export CC="gcc -m64"
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
