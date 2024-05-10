@@ -24,6 +24,7 @@ package="$1"
 set -e
 
 # Fetch sources (uses package 'git').
+# No '--depth 1' here, because we need to run git-version-gen.
 git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 export GNULIB_SRCDIR=`pwd`/gnulib
@@ -33,7 +34,6 @@ rm -f .gitmodules
 
 # Fetch extra files and generate files (uses packages wget, python3, automake, autoconf, m4,
 # help2man, texinfo, xz-utils).
-rm -f .tarball-version
 { $GNULIB_SRCDIR/build-aux/git-version-gen .tarball-version | sed -e 's/-dirty$//'; echo -n '-'; date --utc --iso-8601; } > .tarball-version
 ./bootstrap --no-git --gnulib-srcdir="$GNULIB_SRCDIR"
 
