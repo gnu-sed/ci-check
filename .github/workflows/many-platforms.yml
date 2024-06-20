@@ -101,11 +101,11 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      # - run: sudo apt install ...
+      # - run: sudo apt update; sudo apt install ...
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt install libacl1-dev libattr1-dev'
+          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -765,7 +765,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      # - run: sudo apt install ...
+      # - run: sudo apt update; sudo apt install ...
       - run: |
           pwd
           export CPPFLAGS="-Wall"
