@@ -156,7 +156,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -209,7 +209,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -258,7 +258,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add libacl libattr'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add libacl libattr perl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -355,7 +355,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make' ''
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install -y perl5'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -369,6 +369,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-netbsd:
@@ -404,7 +410,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make' ''
+            ./build-on.sh '${{ env.package }}' '' 'make' '/usr/sbin/pkg_add perl'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -418,6 +424,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-openbsd:
