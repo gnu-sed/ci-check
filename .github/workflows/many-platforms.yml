@@ -105,7 +105,7 @@ jobs:
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev valgrind && sudo localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && sudo localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
+          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev valgrind && sudo localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && sudo localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && sudo localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -156,7 +156,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind glibc-common && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind glibc-common && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -209,7 +209,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind glibc-locale-source && localedef -i en_US -f UTF-8 en_US.UTF-8 && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind glibc-locale-source && localedef -i en_US -f UTF-8 en_US.UTF-8 && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
