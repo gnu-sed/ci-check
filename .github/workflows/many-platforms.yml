@@ -307,7 +307,7 @@ jobs:
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make' ${{ matrix.os == 'macos-14' && '' || 'brew install valgrind' }}
+          ./build-on.sh '${{ env.package }}' '' 'make' ${{ matrix.os == 'macos-14' && '' || '' }}
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
