@@ -105,7 +105,7 @@ jobs:
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev'
+          ./build-on.sh '${{ env.package }}' '' 'make' 'sudo apt update; sudo apt install libacl1-dev libattr1-dev valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -156,7 +156,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -209,7 +209,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'yum -y install libacl-devel libattr-devel perl valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -258,7 +258,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add libacl libattr perl'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add libacl libattr perl valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -307,7 +307,7 @@ jobs:
       - run: |
           pwd
           export CPPFLAGS="-Wall"
-          ./build-on.sh '${{ env.package }}' '' 'make' ''
+          ./build-on.sh '${{ env.package }}' '' 'make' ${{ matrix.os == 'macos-14' && '' || 'brew install valgrind' }}
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -321,6 +321,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-freebsd:
@@ -355,7 +361,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install -y perl5'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install -y perl5 valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -410,7 +416,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make' '/usr/sbin/pkg_add perl'
+            ./build-on.sh '${{ env.package }}' '' 'make' '/usr/sbin/pkg_add perl valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -467,7 +473,7 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
-            ./build-on.sh '${{ env.package }}' '' 'make' ''
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg_add valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -481,6 +487,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11:
@@ -516,7 +528,7 @@ jobs:
             ls -l
             export CPPFLAGS="-Wall"
             export CC="gcc -m64"
-            ./build-on.sh '${{ env.package }}' '' 'make' ''
+            ./build-on.sh '${{ env.package }}' '' 'make' 'pkg install valgrind'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -530,6 +542,12 @@ jobs:
             ${{ env.package }}-*/build/log[123]
             ${{ env.package }}-*/build/test-suite.log
             ${{ env.package }}-*/build/gnulib-tests/test-suite.log
+            ${{ env.package }}-*/build-full/config.cache
+            ${{ env.package }}-*/build-full/config.log
+            ${{ env.package }}-*/build-full/config.status
+            ${{ env.package }}-*/build-full/log[123]
+            ${{ env.package }}-*/build-full/test-suite.log
+            ${{ env.package }}-*/build-full/gnulib-tests/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11-omnios:
