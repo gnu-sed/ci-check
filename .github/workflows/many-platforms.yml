@@ -912,7 +912,7 @@ jobs:
             ls -l
             export CPPFLAGS="-Wall"
             export CC=clang
-            ./build-on.sh '${{ env.package }}' '' 'make' 'apt update; apt -y install libacl1-dev libattr1-dev valgrind locales && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apt update; apt -y install libacl1-dev libattr1-dev locales && localedef -i el_GR -f ISO-8859-7 el_GR.ISO-8859-7 && localedef -i ja_JP -f EUC-JP ja_JP.EUC-JP && localedef -i ru_RU -f UTF-8 ru_RU.UTF-8'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
