@@ -7,7 +7,7 @@ index 0c0f3b3..ed2330e 100644
  avoided_gnulib_modules='
    --avoid=lock-tests
 +  --avoid=memchr-tests
-+  --avoid=memset_explicit
++  --avoid=memset_explicit-tests
  '
  
  # gnulib modules used by this package.
