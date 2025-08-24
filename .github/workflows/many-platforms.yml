@@ -264,7 +264,7 @@ jobs:
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
-            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add libacl libattr perl valgrind musl-locales'
+            ./build-on.sh '${{ env.package }}' '' 'make' 'apk add acl-dev acl attr-dev attr perl valgrind musl-locales'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
