@@ -33,6 +33,7 @@ git clone --depth 1 "${gnulib_url}"
 (cd "$package" && patch -p1 < ../patches/0001-Avoid-UndefinedBehaviorSanitizer-undefined-behavior-.patch)
 (cd "$package" && patch -p1 < ../patches/0001-build-Fix-FTBFS-on-AIX-and-MSVC.patch)
 (cd "$package" && patch -p1 < ../patches/ubsan.diff)
+(cd "$package" && patch -p1 < ../patches/0001-build-Update-after-gnulib-changed.patch)
 
 export GNULIB_SRCDIR=`pwd`/gnulib
 cd "$package"

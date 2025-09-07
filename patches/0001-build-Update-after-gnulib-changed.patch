@@ -1,0 +1,21 @@
+From bcac349f1f59e44fc61766ed3b611f840a5ffe13 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Thu, 4 Sep 2025 00:59:27 +0200
+Subject: [PATCH] build: Update after gnulib changed.
+
+* gnulib-tests/Makefile.am: Initialize AM_CFLAGS.
+---
+ gnulib-tests/Makefile.am | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/gnulib-tests/Makefile.am b/gnulib-tests/Makefile.am
+index 6635f70..f68911f 100644
+--- a/gnulib-tests/Makefile.am
++++ b/gnulib-tests/Makefile.am
+@@ -1 +1,3 @@
++AM_CFLAGS =
++
+ include gnulib.mk
+-- 
+2.50.1
+
