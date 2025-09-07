@@ -25,7 +25,7 @@ set -e
 
 # Fetch sources (uses package 'git').
 # No '--depth 1' here, because we need to run git-version-gen.
-git clone https://git.savannah.gnu.org/git/"$package".git
+git clone https://https.git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 "${gnulib_url}"
 
 # Apply patches.
