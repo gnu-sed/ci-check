@@ -23,10 +23,12 @@ package="$1"
 
 set -e
 
+. ./init-git.sh
+
 # Fetch sources (uses package 'git').
 # No '--depth 1' here, because we need to run git-version-gen.
-git clone https://https.git.savannah.gnu.org/git/"$package".git
-git clone --depth 1 "${gnulib_url}"
+git clone https://git.savannah.gnu.org/git/"$package".git
+git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 
 # Apply patches.
 (cd "$package" && patch -p1 < ../patches/0001-tests-avoid-test-failure-when-running-as-root-or-in-.patch)
