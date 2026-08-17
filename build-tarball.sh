@@ -31,8 +31,7 @@ git clone https://git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 https://git.savannah.gnu.org/git/gnulib.git
 
 # Apply patches.
-(cd "$package" && patch -p1 < ../patches/0001-Avoid-UndefinedBehaviorSanitizer-undefined-behavior-.patch)
-(cd "$package" && patch -p1 < ../patches/ubsan.diff)
+#(cd "$package" && patch -p1 < ../patches/...)
 
 export GNULIB_SRCDIR=`pwd`/gnulib
 cd "$package"
